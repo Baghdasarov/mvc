@@ -39,6 +39,7 @@ class Core {
       $url = explode('/', $url);
       return $url;
     }
+    return false;
   }
   
 }
