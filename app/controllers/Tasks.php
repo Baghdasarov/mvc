@@ -47,6 +47,26 @@ class Tasks extends Controller {
     public function store() {
         $this->authCheck();
         $data = $_POST;
+
+        if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])){
+
+            $image_info = getimagesize($_FILES["image"]["tmp_name"]);
+            $image_width = $image_info[0];
+            $image_height = $image_info[1];
+//            dd('width - ' . $image_width . ', height - ' . $image_height);
+            $name = $_FILES['image']['name'];
+            $unique = uniqid() . '.';
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($name);
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $extensions_arr = array("jpg","jpeg","png","gif");
+            if( in_array($imageFileType,$extensions_arr) ){
+                move_uploaded_file($_FILES['image']['tmp_name'],$target_dir.$unique.$imageFileType);
+                $data['image'] = '/'.$target_dir.$unique.$imageFileType;
+            } else {
+                return false;
+            }
+        }
         $this->model->createTask('tasks', $data);
 
         header('location:/Task/index');

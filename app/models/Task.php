@@ -21,11 +21,11 @@ class Task extends Model {
 
     public function createTask($table, $data)
     {
-        $first_name  = isset($data['first_name']) ? $data['first_name'] : '';
-        $last_name   = isset($data['last_name']) ? $data['last_name'] : '';
-        $description = isset($data['description']) ? $data['description'] : '';
-        $email       = isset($data['email']) ? $data['email'] : '';
-        $image       = isset($data['image']) ? $data['image'] : '';
+        $first_name  = isset($data['first_name']) ? $data['first_name'] : 'No name';
+        $last_name   = isset($data['last_name']) ? $data['last_name'] : null;
+        $description = isset($data['description']) ? $data['description'] : null;
+        $email       = isset($data['email']) ? $data['email'] : 'noemail@gmail.com';
+        $image       = isset($data['image']) ? $data['image'] : null;
         $status      = isset($data['status']) ? $data['status'] : 0;
 
         $column = "first_name, last_name, email, description, image, status";

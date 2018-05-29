@@ -27,7 +27,9 @@
                 <td><?=$result->last_name?></td>
                 <td><?=$result->email?></td>
                 <td><?=$result->description?></td>
-                <td><?=$result->image?></td>
+                <td>
+                    <img src="<?=$result->image?>" alt="No image" width=150>
+                </td>
                 <td>
                     <input class="toggle-task" data-id="<?=$result->id?>" type="checkbox" <?=$result->status?'checked':''?> />
                 </td>
