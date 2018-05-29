@@ -105,8 +105,8 @@ class Database {
             $this->dbh->query($createTableSql);
         }
 
-        $this->query('select * from users WHERE role="admin"');
-        if ($this->rowCount() < 1) {
+        $this->query("select * from users WHERE role='admin'");
+        if (!$this->single()) {
             $password = password_hash('123',PASSWORD_BCRYPT);
             $this->dbh->exec("INSERT INTO users (first_name, last_name, email, token, password, role) VALUES ('Admin', 'Adminovich', 'admin@test.com','null', '".$password."','admin')");
         };

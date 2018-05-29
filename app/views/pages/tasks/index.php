@@ -27,10 +27,7 @@
                 <td><?=$result->description?></td>
                 <td><?=$result->image?></td>
                 <td>
-                    <?php
-                        dd($result->status);
-                    ?>
-                    <input type="checkbox"<?=$result->status?'selected':''?> />
+                    <input class="toggle-task" data-id="<?=$result->id?>" type="checkbox" <?=$result->status?'checked':''?> />
                 </td>
             </tr>
         <?php }?>
