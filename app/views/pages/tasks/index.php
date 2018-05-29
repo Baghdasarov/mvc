@@ -3,9 +3,7 @@
 <div class="container">
     <h2 class="text-center">
         User List
-        <?php if ($data['auth']) {?>
-            <a class="text-success" href="/Tasks/create"><small><i class="fa fa-plus-circle">Add</i></small></a>
-        <?php }?>
+        <a class="text-success" href="/Tasks/create"><small><i class="fa fa-plus-circle">Add</i></small></a>
     </h2>
 
     <table class="table table-striped">

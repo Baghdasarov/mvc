@@ -40,12 +40,10 @@ class Tasks extends Controller {
     }
 
     public function create() {
-        $this->authCheck();
         $this->view('pages/tasks/create');
     }
 
     public function store() {
-        $this->authCheck();
         $data = $_POST;
         if(isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])){
             $name = $_FILES['image']['name'];
@@ -111,8 +109,13 @@ class Tasks extends Controller {
         $this->authCheck();
         $data = $_POST;
         if (!$data['id']) return http_response_code(400);
-        $this->model->updateTask('tasks', $data);
-        return http_response_code(200);
+
+        try {
+            $this->model->updateTask('tasks', $data);
+            return http_response_code(200);
+        }catch (\Exception $exception){
+            return http_response_code(400);
+        }
     }
 
     private function authCheck(){
