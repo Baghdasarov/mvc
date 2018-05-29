@@ -4,7 +4,7 @@
     <h2 class="text-center">
         Create Task
     </h2>
-    <form id="task-form" method="POST" action="Task/store">
+    <form id="task-form" method="POST" action="/Task/store">
         <div class="form-group row">
             <label for="first_name" class="col-2 col-form-label">First Name</label>
             <div class="col-10">

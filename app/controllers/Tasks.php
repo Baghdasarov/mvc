@@ -26,10 +26,18 @@ class Tasks extends Controller {
 
     public function store() {
         $this->authCheck();
-
-
+        $data = $_POST;
+        $this->model->create('tasks', $data);
 
         $this->view('pages/tasks/create');
+    }
+
+    public function update() {
+        $this->authCheck();
+        $data = $_POST;
+        if (!$data['id']) return http_response_code(400);
+        $this->model->update('tasks', $data);
+        return http_response_code(200);
     }
 
     private function authCheck(){

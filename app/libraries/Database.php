@@ -28,6 +28,14 @@ class Database {
         $this->stmt = $this->dbh->prepare($sql);
     }
 
+    public function update($table, $set, $where){
+        return $this->dbh->exec("UPDATE $table SET $set WHERE $where");
+    }
+
+    public function create($table, $column, $value){
+        return $this->dbh->exec("INSERT INTO $table ($column) VALUES ($value)");
+    }
+
     public function bind($param, $value, $type = null){
         if (is_null($type)) {
             switch(true){

@@ -1,6 +1,16 @@
 $(document).ready(function () {
     $(document).on('click', '.toggle-task', function () {
-
+        $.ajax({
+            url: "/Task/update",
+            type: 'post',
+            data: {'id': $(this).data('id'),'status': $(this).is(':checked')},
+            success: function (result) {
+                alert('success');
+            },
+            error: function () {
+                alert('error');
+            }
+        });
     });
 
     $("#uploadImage").change(function() {

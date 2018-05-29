@@ -4,7 +4,6 @@ class User extends Model {
 
     public function checkAuth($data){
 
-
         $data = $this->validation($data);
 
         $this->db->query("Select * from users WHERE email='".$data['email']."'");
@@ -32,12 +31,6 @@ class User extends Model {
         }
         return $data;
     }
-
-    public function getWithTask(){
-        $this->db->query("Select * from users JOIN tasks ON id=tasks.user_id");
-        return  $this->db->resultSet();
-    }
-
 
 }
   
