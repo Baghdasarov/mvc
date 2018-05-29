@@ -14,11 +14,12 @@ class Users extends Controller {
 
     public function login() {
         if (isset($_SESSION["valid"]) && $_SESSION["valid"]) {
-            header('location:/Task/index');
+            header('location:/Tasks/index');
         }
 
         if (isset($_POST['email'])) {
-            if ($data = $this->model->checkAuth($_POST)) {
+            $data = $this->model->checkAuth($_POST);
+            if (isset($data['valid']) && $data['valid']) {
                 header('location:/Task/index');
             };
             $this->view('pages/users/login', $data);

@@ -13,7 +13,8 @@ class Task extends Model {
         $desc   = isset($data['description'])?$data['description']:null;
         $id     = $data['id'];
 
-        $set = "status = $status, description = $desc";
+        $set = "status = $status";
+        if ($desc) $set .= ", description = $desc";
         $where = "id ='$id'";
 
         return parent::update($table, $set, $where);

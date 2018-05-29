@@ -8,7 +8,7 @@ class User extends Model {
 
         $this->db->query("Select * from users WHERE email='".$data['email']."'");
         if (!$user = $this->db->single()) {
-           return ['user' => 'Не праильное имя или пороль'];
+           return ['user' => 'Не праильное имя или пороль', 'valid' => false];
         }
 
         if(!password_verify($_REQUEST['password'], $user->password)){

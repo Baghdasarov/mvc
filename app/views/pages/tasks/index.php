@@ -31,7 +31,14 @@
                     <img src="<?=$result->image?>" alt="No image" width=150>
                 </td>
                 <td>
-                    <input class="toggle-task" data-id="<?=$result->id?>" type="checkbox" <?=$result->status?'checked':''?> />
+                    <?php
+                    if (isset($_SESSION["valid"]) && $_SESSION["valid"]) {
+                            $checked = $result->status?'checked':'';
+                            echo "<input class='toggle-task' data-id='$result->id' type='checkbox' $checked />";
+                        }else{
+                            echo $result->status?'Выполнено':'Не выполнено';
+                        }
+                    ?>
                 </td>
             </tr>
         <?php }?>
