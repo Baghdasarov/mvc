@@ -14,12 +14,12 @@ class User extends Model {
         if(!password_verify($_REQUEST['password'], $user->password)){
             $_SESSION["valid"] = false;
             $_SESSION["errorMessage"] = 'Wrong username or password';
-            return ['password' => 'Не праильный пороль'];
+            return ['password' => 'Не праильный пороль', 'valid' => false];
         };
         $_SESSION["valid"] = true;
         $_SESSION["first_name"] = $user->first_name;
         $_SESSION["last_name"] = $user->last_name;
-        return true;
+        return ['valid' => true];
     }
 
     private function validation($data){
