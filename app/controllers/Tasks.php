@@ -53,7 +53,7 @@ class Tasks extends Controller {
             $target_dir = "uploads/";
             $target_file = $target_dir . basename($name);
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            $extensions_arr = array("jpg","png","gif");
+            $extensions_arr = array("jpg", "jpeg", "png", "gif");
             if( in_array($imageFileType,$extensions_arr) ){
                 $image = '/'.$target_dir.$unique.$imageFileType;
                 $data['image'] = $image;
@@ -62,9 +62,10 @@ class Tasks extends Controller {
                 $image_info = getimagesize($image);
                 $image_width = $image_info[0];
                 $image_height = $image_info[1];
-                if (($image_width < 321 && $image_height < 241) || ($image_width < 241 && $image_height < 321)) {
+                if (($image_width < 321 && $image_height < 241) || ($image_width < 241 && $image_height < 321) || $imageFileType == 'gif') {
                     move_uploaded_file($_FILES['image']['tmp_name'],$target_dir.$unique.$imageFileType);
-                    header('location:/Task/index');
+                    header('location:/Tasks/index');
+                    return;
                 } else {
                     $original_img = imagecreatefromjpeg($image);
                     if ($image_width > $image_height) {
@@ -92,12 +93,18 @@ class Tasks extends Controller {
                         $image_width, $image_height);
                     imagejpeg($thumb_img,  $target_dir.$unique.$imageFileType);
                     imagedestroy($thumb_img);
-                    header('location:/Task/index');
+                    header('location:/Tasks/index');
+                    return;
                 }
             } else {
-                return false;
+                $data = [
+                    'error' => 'Тип файла не поддерживаеться'
+                ];
+                $this->view('pages/Tasks/create', $data);
             }
         }
+        header('location:/Tasks/create');
+        return;
     }
 
     public function update() {
@@ -110,7 +117,8 @@ class Tasks extends Controller {
 
     private function authCheck(){
         if (!isset($_SESSION["valid"]) || !$_SESSION["valid"]) {
-            header('location:/Task/index');
+            header('location:/Tasks/index');
+            return;
         }
     }
 }

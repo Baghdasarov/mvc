@@ -4,6 +4,18 @@
     <h2 class="text-center">
         Create Task
     </h2>
+    <div class="col-md-12 text-center">
+        <div class="form-control-feedback">
+            <span class="text-danger align-middle">
+                <?php
+                    if(isset($data['error'])) {
+                        echo $data['error'];
+                    }
+                ?>
+            </span>
+        </div>
+    </div>
+    <br />
     <form id="task-form" method="POST" enctype="multipart/form-data" action="/Tasks/store">
         <div class="form-group row">
             <label for="first_name" class="col-2 col-form-label">First Name</label>
