@@ -2,6 +2,11 @@
 
 class Task extends Model {
 
+    public function sqlQuery($sql) {
+        $this->db->query($sql);
+        return  $this->db->resultSet();
+    }
+
     public function updateTask($table, $data)
     {
         $status = isset($data['status'])?$data['status']:0;

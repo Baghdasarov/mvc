@@ -11,10 +11,30 @@ class Tasks extends Controller {
     public function index() {
         $results = $this->model->get('tasks');
 
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $per_page = 3;
+        $offset = ($page-1) * $per_page;
+
+        $total_pages = ceil(count($results) / $per_page);
+        $sql = "SELECT * FROM tasks ";
+        if (isset($_GET['orderBy'])) {
+            $sql .= " ORDER BY ".$_GET['orderBy'].' '.$_GET['type'];
+        }
+        $sql .= " LIMIT $offset, $per_page";
+        $results = $this->model->sqlQuery($sql);
+
         $data = [
-            'title'   => 'Tasks',
-            'results' => $results,
-            'auth'    => isset($_SESSION['valid']) && $_SESSION['valid']?true:false,
+            'title'       => 'Tasks',
+            'type'        => isset($_GET['type']) && $_GET['type']=='desc'?'asc':'desc',
+            'results'     => $results,
+            'total_pages' => $total_pages,
+            'current_page'=> $page,
+            'auth'        => isset($_SESSION['valid']) && $_SESSION['valid']?true:false,
         ];
         $this->view('pages/tasks/index', $data);
     }

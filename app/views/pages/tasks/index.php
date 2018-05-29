@@ -12,18 +12,18 @@
         <caption><?=$data['title'];?></caption>
         <thead>
         <tr>
-            <th>First Name</th>
+            <th><a href="/Tasks/index?orderBy=first_name&type=<?=$data['type']?>">First Name</a></th>
             <th>Last Name</th>
-            <th>Email</th>
+            <th><a href="/Tasks/index?orderBy=email&type=<?=$data['type']?>">Email</a></th>
             <th>Description</th>
             <th>Image</th>
-            <th>Status</th>
+            <th><a href="/Tasks/index?orderBy=status&type=<?=$data['type']?>">Status</a></th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($data['results'] as $result) {?>
             <tr>
-                <td><?=$result->first_name?></td>
+                <td><?=$result->first_name?></a></td>
                 <td><?=$result->last_name?></td>
                 <td><?=$result->email?></td>
                 <td><?=$result->description?></td>
@@ -35,5 +35,9 @@
         <?php }?>
         </tbody>
     </table>
+    <?php for($i=1; $i<=$data['total_pages'];$i++) {
+        $class = $data['current_page'] == $i?'text-success':'';
+        echo "<a class='$class' href='/Tasks/index?page=$i'>$i.</a>";
+    }?>
 </div>
 <?php require( APPROOT . '/views/layout/footer.view.php');  ?>
