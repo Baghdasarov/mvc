@@ -13,6 +13,7 @@
         <thead>
         <tr>
             <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
             <th>Description</th>
             <th>Image</th>
@@ -23,6 +24,7 @@
         <?php foreach ($data['results'] as $result) {?>
             <tr>
                 <td><?=$result->first_name?></td>
+                <td><?=$result->last_name?></td>
                 <td><?=$result->email?></td>
                 <td><?=$result->description?></td>
                 <td><?=$result->image?></td>
