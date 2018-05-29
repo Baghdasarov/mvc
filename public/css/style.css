@@ -1,3 +1,16 @@
 body {
   background: #eee;
 }
+
+/*Login Form*/
+.login-form .fa-at, .login-form .fa-key {
+  width: 2.6rem;
+}
+
+/*Global*/
+.display-block {
+  display: block !important;
+}
+.full-width {
+  width: 100%;
+}
