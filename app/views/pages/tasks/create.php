@@ -4,7 +4,7 @@
     <h2 class="text-center">
         Create Task
     </h2>
-    <form id="task-form" method="POST" action="/Task/store">
+    <form id="task-form" method="POST" action="/Tasks/store">
         <div class="form-group row">
             <label for="first_name" class="col-2 col-form-label">First Name</label>
             <div class="col-10">
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="uploadImage">Upload Image</label>
-            <input type="file" class="form-control-file" id="uploadImage" >
+            <input type="file" name="image" class="form-control-file" id="uploadImage" >
             <img id="preview" class="d-none" src="#" alt="Will be uploaded image" width="150" />
         </div>
         <div class="form-group text-center">

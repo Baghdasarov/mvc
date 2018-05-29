@@ -17,6 +17,6 @@ class Model {
     }
 
     public function create($table, $column, $value) {
-        return  $this->db->update($table, $set, $where);
+        return  $this->db->create($table, $column, $value);
     }
 }

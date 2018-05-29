@@ -2,7 +2,7 @@
 
 class Task extends Model {
 
-    public function update($table, $data, $where=false)
+    public function updateTask($table, $data)
     {
         $status = isset($data['status'])?$data['status']:0;
         $desc   = isset($data['description'])?$data['description']:null;
@@ -14,16 +14,17 @@ class Task extends Model {
         return parent::update($table, $set, $where);
     }
 
-    public function create($table, $data, $value=false)
+    public function createTask($table, $data)
     {
-        $first_name  = isset($data['first_name'])?$data['status']:null;
-        $last_name   = isset($data['last_name'])?$data['description']:null;
-        $email       = isset($data['email'])?$data['email']:null;
-        $image       = isset($data['image'])?$data['image']:null;
-        $status      = isset($data['status'])?$data['status']:null;
+        $first_name  = isset($data['first_name']) ? $data['first_name'] : '';
+        $last_name   = isset($data['last_name']) ? $data['last_name'] : '';
+        $description = isset($data['description']) ? $data['description'] : '';
+        $email       = isset($data['email']) ? $data['email'] : '';
+        $image       = isset($data['image']) ? $data['image'] : '';
+        $status      = isset($data['status']) ? $data['status'] : 0;
 
         $column = "first_name, last_name, email, description, image, status";
-        $value  = "$first_name, $last_name, $email, $image, $status";
+        $value  = "'$first_name', '$last_name', '$email', '$description', '$image', $status";
         return parent::create($table, $column, $value);
     }
 }
