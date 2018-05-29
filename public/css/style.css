@@ -14,3 +14,7 @@ body {
 .full-width {
   width: 100%;
 }
+.edit-icon {
+    margin-left: 15px;
+    cursor: pointer;
+}

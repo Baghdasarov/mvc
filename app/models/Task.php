@@ -16,7 +16,7 @@ class Task extends Model {
 
         if ($status) $set = "status = $status";
         if ($set && $desc) $set .= ', ';
-        if ($desc) $set .= "description = $desc";
+        if ($desc) $set .= "description = '$desc'";
 
         $where = "id ='$id'";
 

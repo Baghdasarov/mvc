@@ -35,6 +35,17 @@ $(document).ready(function () {
         $('#preview-button').removeClass('d-none');
         $('#task-preview').addClass('d-none');
     })
+
+    $('.cursor-pointer').on('click', function () {
+
+    })
+
+    $(".edit-icon").on("click", function () {
+        var description = $(this).siblings().text();
+        var id = $(this).attr('data-id');
+        $(".modal-body #edited-description").val( description );
+        $(".modal-body #id").val( id );
+    });
 });
 
 function readURL(input) {

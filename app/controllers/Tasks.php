@@ -110,12 +110,20 @@ class Tasks extends Controller {
         $data = $_POST;
         if (!$data['id']) return http_response_code(400);
 
+        $isAjax = false;
+        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            $isAjax = true;
+        }
         try {
             $this->model->updateTask('tasks', $data);
-            return http_response_code(200);
+            if ($isAjax) return http_response_code(200);
+            header('location:'. $_SERVER['HTTP_REFERER']);
         }catch (\Exception $exception){
-            return http_response_code(400);
+            if ($isAjax) return http_response_code(400);
+            header('location:'. $_SERVER['HTTP_REFERER']);
         }
+
+        return;
     }
 
     private function authCheck(){
