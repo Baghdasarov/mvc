@@ -100,14 +100,6 @@ class Database {
           PRIMARY KEY (id)
         ) ENGINE=InnoDB';
 
-        $tables[] = 'CREATE TABLE IF NOT EXISTS error_log (
-          id INT NOT NULL AUTO_INCREMENT,
-          function_name VARCHAR(150) NOT NULL,
-          messages LONGTEXT NOT NULL,
-          created_at TIMESTAMP,
-          updated_at TIMESTAMP,
-          PRIMARY KEY (id)
-        ) ENGINE=InnoDB';
 
         foreach ($tables as $createTableSql) {
             $this->dbh->query($createTableSql);
@@ -116,7 +108,7 @@ class Database {
         $this->query("select * from users WHERE role='admin'");
         if (!$this->single()) {
             $password = password_hash('123',PASSWORD_BCRYPT);
-            $this->dbh->exec("INSERT INTO users (first_name, last_name, email, token, password, role) VALUES ('Admin', 'Adminovich', 'admin@test.com','null', '".$password."','admin')");
+            $this->dbh->exec("INSERT INTO users (first_name, last_name, email, token, password, role) VALUES ('Admin', 'Adminovich', 'admin','null', '".$password."','admin')");
         };
     }
 }

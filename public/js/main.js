@@ -43,8 +43,8 @@ $(document).ready(function () {
     $(".edit-icon").on("click", function () {
         var description = $(this).siblings().text();
         var id = $(this).attr('data-id');
-        $(".modal-body #edited-description").val( description );
-        $(".modal-body #id").val( id );
+        $(".modal-body #edited-description").text(description);
+        $(".modal-body #id").val(id);
     });
 });
 

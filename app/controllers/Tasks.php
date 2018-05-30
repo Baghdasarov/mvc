@@ -52,7 +52,7 @@ class Tasks extends Controller {
             $target_file = $target_dir . basename($name);
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             $extensions_arr = array("jpg", "jpeg", "png", "gif");
-            if( in_array($imageFileType,$extensions_arr) ){
+            if( in_array($imageFileType, $extensions_arr) ){
                 $image = '/'.$target_dir.$unique.$imageFileType;
                 $data['image'] = $image;
                 $this->model->createTask('tasks', $data);
@@ -65,7 +65,13 @@ class Tasks extends Controller {
                     header('location:/Tasks/index');
                     return;
                 } else {
-                    $original_img = imagecreatefromjpeg($image);
+                    if ($imageFileType == 'png') {
+                        $original_img = imagecreatefrompng($image);
+                    } elseif ($imageFileType == 'gif') {
+                        $original_img = imagecreatefromgif($image);
+                    } else {
+                        $original_img = imagecreatefromjpeg($image);
+                    }
                     if ($image_width > $image_height) {
                         if (($image_width / 320) > ($image_height / 240)) {
                             $thumb_w = 320;
